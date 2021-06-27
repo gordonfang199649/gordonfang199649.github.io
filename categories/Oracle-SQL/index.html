@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>分類: Oracle SQL - Gordon的寇汀筆記本</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Gordon的寇汀筆記本"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Gordon的寇汀筆記本"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="紀錄個人軟體開發筆記本"><meta property="og:type" content="blog"><meta property="og:title" content="Gordon的寇汀筆記本"><meta property="og:url" content="http://github.io/"><meta property="og:site_name" content="Gordon的寇汀筆記本"><meta property="og:description" content="紀錄個人軟體開發筆記本"><meta property="og:locale" content="zh_TW"><meta property="og:image" content="http://github.io/img/og_image.png"><meta property="article:author" content="Gordon Fang"><meta property="article:tag" content="Software Engineering"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://github.io"},"headline":"Gordon的寇汀筆記本","image":["http://github.io/img/og_image.png"],"author":{"@type":"Person","name":"Gordon Fang"},"publisher":{"@type":"Organization","name":"Gordon Fang","logo":{"@type":"ImageObject","url":"http://github.io/img/logo.svg"}},"description":"紀錄個人軟體開發筆記本"}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script><!--!--><!--!--><script data-ad-client="ca-pub-1036677873706989" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" async></script><meta name="generator" content="Hexo 5.4.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Gordon的寇汀筆記本" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜尋" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><nav class="breadcrumb" aria-label="breadcrumbs"><ul><li><a href="/categories">分類</a></li><li class="is-active"><a href="#" aria-current="page">Oracle SQL</a></li></ul></nav></div></div><div class="card"><div class="card-image"><a class="image is-7by3" href="/2020/06/14/%5BOracle%20SQL%5D%20rank()%E5%88%86%E6%9E%90%E5%87%BD%E6%95%B8%E7%94%A8%E6%B3%95/"><img class="fill" src="https://images.unsplash.com/photo-1510074377623-8cf13fb86c08?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1952&amp;q=80" alt="[Oracle SQL] rank()分析函數用法"></a></div><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2020-06-14T10:16:21.000Z" title="6/14/2020, 6:16:21 PM">2020-06-14</time>發表</span><span class="level-item"><time dateTime="2021-06-27T15:42:21.944Z" title="6/27/2021, 11:42:21 PM">2021-06-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/Oracle-SQL/">Oracle SQL</a></span><span class="level-item">7 分鐘讀完 (大約1110個字)</span></div></div><h1 class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2020/06/14/%5BOracle%20SQL%5D%20rank()%E5%88%86%E6%9E%90%E5%87%BD%E6%95%B8%E7%94%A8%E6%B3%95/">[Oracle SQL] rank()分析函數用法</a></h1><div class="content"><h1 id="分析函數簡介"><a href="#分析函數簡介" class="headerlink" title="分析函數簡介"></a>分析函數簡介</h1><p>RANK(), DENSE_RANK(), ROW_RANK()都是 Oracle SQL 的分析函數，可根據分群、排序依據分配序列給每一筆資料，可以套用在成績、業績排名、或是群組內排名等等，以下使用員工薪水作為範例，範例會有兩張表格分別為 EMPLOYEE, DEPARTMENT，實作部分會告訴各位三種函數有何差別。</p>
+<h2 id="TABLE-SCHEMA"><a href="#TABLE-SCHEMA" class="headerlink" title="TABLE SCHEMA"></a>TABLE SCHEMA</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> DEPARTMENT (</span><br><span class="line">  DEPT_ID     NUMBER            <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">, DEPT_NAME   VARCHAR2(<span class="number">10</span> <span class="type">CHAR</span>)</span><br><span class="line">, <span class="keyword">CONSTRAINT</span>  DEPARTMENT_PK <span class="keyword">PRIMARY</span> KEY(DEPT_ID)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> EMPLOYEE (</span><br><span class="line">  EMPLOYEE_ID NUMBER <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">, DEPT_ID     NUMBER <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">, NAME        VARCHAR2(<span class="number">20</span> <span class="type">CHAR</span>)</span><br><span class="line">, SALARY      NUMBER</span><br><span class="line">, <span class="keyword">CONSTRAINT</span> EMPLOYEE_PK   <span class="keyword">PRIMARY</span> KEY (EMPLOYEE_ID)</span><br><span class="line">, <span class="keyword">CONSTRAINT</span> DEPARTMENT_FK <span class="keyword">FOREIGN</span> KEY (DEPT_ID) <span class="keyword">REFERENCES</span> DEPARTMENT(DEPT_ID)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> DEPARTMENT <span class="keyword">VALUES</span>( <span class="number">1</span>, <span class="string">&#x27;IT&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> DEPARTMENT <span class="keyword">VALUES</span>( <span class="number">2</span>, <span class="string">&#x27;ACCT&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> DEPARTMENT <span class="keyword">VALUES</span>( <span class="number">3</span>, <span class="string">&#x27;MAINT&#x27;</span> );</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span>( <span class="number">1</span>, <span class="number">1</span>, <span class="string">&#x27;Terry&#x27;</span> , <span class="number">50000</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span>( <span class="number">2</span>, <span class="number">1</span>, <span class="string">&#x27;Emily&#x27;</span> , <span class="number">50000</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span>( <span class="number">3</span>, <span class="number">2</span>, <span class="string">&#x27;Joyce&#x27;</span> , <span class="number">38600</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span>( <span class="number">4</span>, <span class="number">2</span>, <span class="string">&#x27;Bob&#x27;</span>   , <span class="number">32800</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span>( <span class="number">5</span>, <span class="number">2</span>, <span class="string">&#x27;Phoebe&#x27;</span>, <span class="number">32800</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span>( <span class="number">6</span>, <span class="number">3</span>, <span class="string">&#x27;Olive&#x27;</span> , <span class="number">28000</span>);</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br></pre></td></tr></table></figure>
+
+<h1 id="語法使用"><a href="#語法使用" class="headerlink" title="語法使用"></a>語法使用</h1><p><code>ROW_NUM()</code>、<code>RANK()</code>、<code>DENSE_RANK()</code>是分析函數用來分派序列給每一筆資料，<code>ORDER BY 欄位名稱 [DESC|ASC]</code>指的是要依據什麼欄位進行遞減[增]排序，此為必填子句，<code>[PARTITION BY 欄位名稱]</code>指的是要依照什麼欄位進行分群，例如：班級、單位內排序，此為選填子句，若沒有這段子句，則會針對所有的資料分派序列。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[ROW_NUM()<span class="operator">|</span><span class="built_in">RANK</span>()<span class="operator">|</span><span class="built_in">DENSE_RANK</span>()]</span><br><span class="line"><span class="keyword">OVER</span>([<span class="keyword">PARTITION</span> <span class="keyword">BY</span> 欄位名稱] <span class="keyword">ORDER</span> <span class="keyword">BY</span> 欄位名稱 [<span class="keyword">DESC</span><span class="operator">|</span><span class="keyword">ASC</span>])</span><br></pre></td></tr></table></figure>
+
+<h1 id="RANK-使用方法"><a href="#RANK-使用方法" class="headerlink" title="RANK()使用方法"></a>RANK()使用方法</h1><blockquote>
+<p>範例是依據員工薪水高低做排名，若排序資料值趨近一樣，RANK()函數會將排序名次並列，並列後的排名則佔用名次，再往後排序。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> EM.EMPLOYEE_ID                   <span class="keyword">AS</span> EMPLOYEE_ID</span><br><span class="line">      ,EM.NAME                          <span class="keyword">AS</span> EMPLOYEE_NAME</span><br><span class="line">      ,EM.SALARY                        <span class="keyword">AS</span> EMPLOYEE_SALARY</span><br><span class="line">      ,<span class="built_in">RANK</span>() <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> EM.SALARY <span class="keyword">DESC</span>) <span class="keyword">AS</span> SALARY_RANK</span><br><span class="line">  <span class="keyword">FROM</span> EMPLOYEE EM;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查詢結果"><a href="#查詢結果" class="headerlink" title="查詢結果"></a>查詢結果</h2><table>
+<thead>
+<tr>
+<th align="center">EMPLOYEE_ID</th>
+<th align="center">EMPLOYEE_NAME</th>
+<th align="center">EMPLOYEE_SALARY</th>
+<th align="center">SALARY_RANK</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">Terry</td>
+<td align="center">50000</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Emily</td>
+<td align="center">50000</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Joyce</td>
+<td align="center">38600</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">Bob</td>
+<td align="center">32800</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">Phoebe</td>
+<td align="center">32800</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">Olive</td>
+<td align="center">28000</td>
+<td align="center">6</td>
+</tr>
+</tbody></table>
+<h1 id="DENSE-RANK-使用方法"><a href="#DENSE-RANK-使用方法" class="headerlink" title="DENSE_RANK()使用方法"></a>DENSE_RANK()使用方法</h1><blockquote>
+<p>DENSE_RANK()函數與 RANK()函數使用方式很相似，兩者差別在於並列後的名次並不會佔用。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> EM.EMPLOYEE_ID                              <span class="keyword">AS</span> EMPLOYEE_ID</span><br><span class="line">      ,EM.NAME                                     <span class="keyword">AS</span> EMPLOYEE_NAME</span><br><span class="line">      ,EM.SALARY                                   <span class="keyword">AS</span> EMPLOYEE_SALARY</span><br><span class="line">      ,<span class="built_in">DENSE_RANK</span>() <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> EM.SALARY <span class="keyword">DESC</span>) <span class="keyword">AS</span> SALARY_RANK</span><br><span class="line">  <span class="keyword">FROM</span> EMPLOYEE EM;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查詢結果-1"><a href="#查詢結果-1" class="headerlink" title="查詢結果"></a>查詢結果</h2><table>
+<thead>
+<tr>
+<th align="center">EMPLOYEE_ID</th>
+<th align="center">EMPLOYEE_NAME</th>
+<th align="center">EMPLOYEE_SALARY</th>
+<th align="center">SALARY_RANK</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">Terry</td>
+<td align="center">50000</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Emily</td>
+<td align="center">50000</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Joyce</td>
+<td align="center">38600</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">Bob</td>
+<td align="center">32800</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">Phoebe</td>
+<td align="center">32800</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">Olive</td>
+<td align="center">28000</td>
+<td align="center">4</td>
+</tr>
+</tbody></table>
+<h1 id="ROW-NUMBER-使用方法"><a href="#ROW-NUMBER-使用方法" class="headerlink" title="ROW_NUMBER()使用方法"></a>ROW_NUMBER()使用方法</h1><blockquote>
+<p>ROW_NUMBER()函數是並不考慮排序並列的情況，序列依序分派下來。</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> EM.EMPLOYEE_ID                              <span class="keyword">AS</span> EMPLOYEE_ID</span><br><span class="line">      ,EM.NAME                                     <span class="keyword">AS</span> EMPLOYEE_NAME</span><br><span class="line">      ,EM.SALARY                                   <span class="keyword">AS</span> EMPLOYEE_SALARY</span><br><span class="line">      ,<span class="built_in">ROW_NUMBER</span>() <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> EM.SALARY <span class="keyword">DESC</span>) <span class="keyword">AS</span> SALARY_RANK</span><br><span class="line">  <span class="keyword">FROM</span> EMPLOYEE EM;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查詢結果-2"><a href="#查詢結果-2" class="headerlink" title="查詢結果"></a>查詢結果</h2><table>
+<thead>
+<tr>
+<th align="center">EMPLOYEE_ID</th>
+<th align="center">EMPLOYEE_NAME</th>
+<th align="center">EMPLOYEE_SALARY</th>
+<th align="center">SALARY_RANK</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">Terry</td>
+<td align="center">50000</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Emily</td>
+<td align="center">50000</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Joyce</td>
+<td align="center">38600</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">Bob</td>
+<td align="center">32800</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">Phoebe</td>
+<td align="center">32800</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">Olive</td>
+<td align="center">28000</td>
+<td align="center">6</td>
+</tr>
+</tbody></table>
+<h1 id="分群排名"><a href="#分群排名" class="headerlink" title="分群排名"></a>分群排名</h1><blockquote>
+<p>以下範例依據部門分群排名</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> EM.EMPLOYEE_ID                                                      <span class="keyword">AS</span> EMPLOYEE_ID</span><br><span class="line">      ,EM.NAME                                                             <span class="keyword">AS</span> EMPLOYEE_NAME</span><br><span class="line">      ,DP.DEPT_NAME                                                        <span class="keyword">AS</span> DEPT_NAME</span><br><span class="line">      ,EM.SALARY                                                           <span class="keyword">AS</span> EMPLOYEE_SALARY</span><br><span class="line">      ,<span class="built_in">DENSE_RANK</span>() <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> EM.DEPT_ID <span class="keyword">ORDER</span> <span class="keyword">BY</span> EM.SALARY <span class="keyword">DESC</span>) <span class="keyword">AS</span> SALARY_RANK</span><br><span class="line">  <span class="keyword">FROM</span> EMPLOYEE EM</span><br><span class="line"> <span class="keyword">INNER</span> <span class="keyword">JOIN</span> DEPARTMENT DP</span><br><span class="line">         <span class="keyword">ON</span> EM.DEPT_ID <span class="operator">=</span> DP.DEPT_ID;</span><br></pre></td></tr></table></figure>
+
+<h2 id="查詢結果-3"><a href="#查詢結果-3" class="headerlink" title="查詢結果"></a>查詢結果</h2><table>
+<thead>
+<tr>
+<th align="center">EMPLOYEE_ID</th>
+<th align="center">EMPLOYEE_NAME</th>
+<th align="center">DEPT_NAME</th>
+<th align="center">EMPLOYEE_SALARY</th>
+<th align="center">SALARY_RANK</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">Terry</td>
+<td align="center">IT</td>
+<td align="center">50000</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">Emily</td>
+<td align="center">IT</td>
+<td align="center">50000</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">Joyce</td>
+<td align="center">ACCT</td>
+<td align="center">38600</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">Bob</td>
+<td align="center">ACCT</td>
+<td align="center">32800</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">Phoebe</td>
+<td align="center">ACCT</td>
+<td align="center">32800</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">Olive</td>
+<td align="center">MAINT</td>
+<td align="center">28000</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<h1 id="完整程式碼"><a href="#完整程式碼" class="headerlink" title="完整程式碼"></a>完整程式碼</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">OR</span> REPLACE <span class="keyword">PROCEDURE</span> PROC_DROP_TAB_IF_EXISTS(</span><br><span class="line">    v_table_name <span class="keyword">IN</span> VARCHAR2 <span class="comment">--TABLE NAME</span></span><br><span class="line">) <span class="keyword">IS</span></span><br><span class="line">    <span class="comment">--INITIALIZE ROW NUMBER VARIABLE</span></span><br><span class="line">    v_count NUMBER;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    v_count :<span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="number">1</span>)</span><br><span class="line">      <span class="keyword">INTO</span> v_count</span><br><span class="line">      <span class="keyword">FROM</span> USER_TABLES</span><br><span class="line">     <span class="keyword">WHERE</span> TABLE_NAME <span class="operator">=</span> v_table_name;</span><br><span class="line"></span><br><span class="line">    IF v_count <span class="operator">&gt;</span> <span class="number">0</span> <span class="keyword">THEN</span></span><br><span class="line">        <span class="keyword">EXECUTE</span> IMMEDIATE <span class="string">&#x27;DROP TABLE &#x27;</span><span class="operator">||</span> v_table_name <span class="operator">||</span><span class="string">&#x27; CASCADE CONSTRAINTS PURGE&#x27;</span>;</span><br><span class="line">    <span class="keyword">END</span> IF;</span><br><span class="line"><span class="keyword">END</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">EXECUTE</span> PROC_DROP_TAB_IF_EXISTS(<span class="string">&#x27;DEPARTMENT&#x27;</span>);</span><br><span class="line"><span class="keyword">EXECUTE</span> PROC_DROP_TAB_IF_EXISTS(<span class="string">&#x27;EMPLOYEE&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> DEPARTMENT (</span><br><span class="line">  DEPT_ID     NUMBER            <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">, DEPT_NAME   VARCHAR2(<span class="number">10</span> <span class="type">CHAR</span>)</span><br><span class="line">, <span class="keyword">CONSTRAINT</span>  DEPARTMENT_PK <span class="keyword">PRIMARY</span> KEY(DEPT_ID)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> EMPLOYEE (</span><br><span class="line">  EMPLOYEE_ID NUMBER <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">, DEPT_ID     NUMBER <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">, NAME        VARCHAR2(<span class="number">20</span> <span class="type">CHAR</span>)</span><br><span class="line">, SALARY      NUMBER</span><br><span class="line">, <span class="keyword">CONSTRAINT</span> EMPLOYEE_PK   <span class="keyword">PRIMARY</span> KEY (EMPLOYEE_ID)</span><br><span class="line">, <span class="keyword">CONSTRAINT</span> DEPARTMENT_FK <span class="keyword">FOREIGN</span> KEY (DEPT_ID) <span class="keyword">REFERENCES</span> DEPARTMENT(DEPT_ID)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> DEPARTMENT <span class="keyword">VALUES</span>( <span class="number">1</span>, <span class="string">&#x27;IT&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> DEPARTMENT <span class="keyword">VALUES</span>( <span class="number">2</span>, <span class="string">&#x27;ACCT&#x27;</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> DEPARTMENT <span class="keyword">VALUES</span>( <span class="number">3</span>, <span class="string">&#x27;MAINT&#x27;</span> );</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span>( <span class="number">1</span>, <span class="number">1</span>, <span class="string">&#x27;Terry&#x27;</span> , <span class="number">50000</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span>( <span class="number">2</span>, <span class="number">1</span>, <span class="string">&#x27;Emily&#x27;</span> , <span class="number">50000</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span>( <span class="number">3</span>, <span class="number">2</span>, <span class="string">&#x27;Joyce&#x27;</span> , <span class="number">38600</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span>( <span class="number">4</span>, <span class="number">2</span>, <span class="string">&#x27;Bob&#x27;</span>   , <span class="number">32800</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span>( <span class="number">5</span>, <span class="number">2</span>, <span class="string">&#x27;Phoebe&#x27;</span>, <span class="number">32800</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> EMPLOYEE <span class="keyword">VALUES</span>( <span class="number">6</span>, <span class="number">3</span>, <span class="string">&#x27;Olive&#x27;</span> , <span class="number">28000</span>);</span><br><span class="line"><span class="keyword">COMMIT</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> EM.EMPLOYEE_ID                   <span class="keyword">AS</span> EMPLOYEE_ID</span><br><span class="line">      ,EM.NAME                          <span class="keyword">AS</span> EMPLOYEE_NAME</span><br><span class="line">      ,EM.SALARY                        <span class="keyword">AS</span> EMPLOYEE_SALARY</span><br><span class="line">      ,<span class="built_in">RANK</span>() <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> EM.SALARY <span class="keyword">DESC</span>) <span class="keyword">AS</span> SALARY_RANK</span><br><span class="line">  <span class="keyword">FROM</span> EMPLOYEE EM;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> EM.EMPLOYEE_ID                   <span class="keyword">AS</span> EMPLOYEE_ID</span><br><span class="line">      ,EM.NAME                          <span class="keyword">AS</span> EMPLOYEE_NAME</span><br><span class="line">      ,EM.SALARY                        <span class="keyword">AS</span> EMPLOYEE_SALARY</span><br><span class="line">      ,<span class="built_in">ROW_NUMBER</span>() <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> EM.SALARY <span class="keyword">DESC</span>) <span class="keyword">AS</span> SALARY_RANK</span><br><span class="line">  <span class="keyword">FROM</span> EMPLOYEE EM;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> EM.EMPLOYEE_ID                   <span class="keyword">AS</span> EMPLOYEE_ID</span><br><span class="line">      ,EM.NAME                          <span class="keyword">AS</span> EMPLOYEE_NAME</span><br><span class="line">      ,EM.SALARY                        <span class="keyword">AS</span> EMPLOYEE_SALARY</span><br><span class="line">      ,<span class="built_in">DENSE_RANK</span>() <span class="keyword">OVER</span> (<span class="keyword">ORDER</span> <span class="keyword">BY</span> EM.SALARY <span class="keyword">DESC</span>) <span class="keyword">AS</span> SALARY_RANK</span><br><span class="line">  <span class="keyword">FROM</span> EMPLOYEE EM;</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> EM.EMPLOYEE_ID                                                      <span class="keyword">AS</span> EMPLOYEE_ID</span><br><span class="line">      ,EM.NAME                                                             <span class="keyword">AS</span> EMPLOYEE_NAME</span><br><span class="line">      ,DP.DEPT_NAME                                                        <span class="keyword">AS</span> DEPT_NAME</span><br><span class="line">      ,EM.SALARY                                                           <span class="keyword">AS</span> EMPLOYEE_SALARY</span><br><span class="line">      ,<span class="built_in">DENSE_RANK</span>() <span class="keyword">OVER</span> (<span class="keyword">PARTITION</span> <span class="keyword">BY</span> EM.DEPT_ID <span class="keyword">ORDER</span> <span class="keyword">BY</span> EM.SALARY <span class="keyword">DESC</span>) <span class="keyword">AS</span> SALARY_RANK</span><br><span class="line">  <span class="keyword">FROM</span> EMPLOYEE EM</span><br><span class="line"> <span class="keyword">INNER</span> <span class="keyword">JOIN</span> DEPARTMENT DP</span><br><span class="line">         <span class="keyword">ON</span> EM.DEPT_ID <span class="operator">=</span> DP.DEPT_ID;</span><br></pre></td></tr></table></figure>
+
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><h2 id="Oracle-ROW-NUMBER"><a href="#Oracle-ROW-NUMBER" class="headerlink" title="Oracle ROW_NUMBER"></a>Oracle ROW_NUMBER</h2><p><a target="_blank" rel="noopener" href="https://www.oracletutorial.com/oracle-analytic-functions/oracle-row_number/">https://www.oracletutorial.com/oracle-analytic-functions/oracle-row_number/</a></p>
+<h2 id="Oracle-PL-SQL-Rank-排名次查詢"><a href="#Oracle-PL-SQL-Rank-排名次查詢" class="headerlink" title="Oracle PL/SQL: Rank 排名次查詢"></a>Oracle PL/SQL: Rank 排名次查詢</h2><p><a target="_blank" rel="noopener" href="https://tomkuo139.blogspot.com/2009/04/plsql-rank.html">https://tomkuo139.blogspot.com/2009/04/plsql-rank.html</a></p>
+<h2 id="Oracle-中-rank-over-dense-rank-row-number-的区别"><a href="#Oracle-中-rank-over-dense-rank-row-number-的区别" class="headerlink" title="Oracle 中 rank() over, dense_rank(), row_number() 的区别"></a>Oracle 中 rank() over, dense_rank(), row_number() 的区别</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/baidu_37107022/article/details/78033513">https://blog.csdn.net/baidu_37107022/article/details/78033513</a></p>
+</div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://media-exp3.licdn.com/dms/image/C5603AQFqNq2M0i4PHQ/profile-displayphoto-shrink_200_200/0/1604161427445?e=1629936000&amp;v=beta&amp;t=f4I54cWmJHG4c0hTGY8it5jDTxkxQYFW6uzeYXE1XYU" alt="Gordon Fang"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Gordon Fang</p><p class="is-size-6 is-block">Junior Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Kaohsiung, Taiwan</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">14</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分類</p><a href="/categories"><p class="title">4</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">標籤</p><a href="/tags"><p class="title">12</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/gordonfang199649" target="_blank" rel="noopener">追蹤</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/gordonfang199649"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分類</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/Hexo/"><span class="level-start"><span class="level-item">Hexo</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/Image-Processing/"><span class="level-start"><span class="level-item">Image Processing</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/LeetCode/"><span class="level-start"><span class="level-item">LeetCode</span></span><span class="level-end"><span class="level-item tag">11</span></span></a></li><li><a class="level is-mobile" href="/categories/Oracle-SQL/"><span class="level-start"><span class="level-item">Oracle SQL</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-06-27T15:40:00.000Z">2021-06-27</time></p><p class="title"><a href="/2021/06/27/%5BLeetCode%5D%20844.%20Backspace%20String%20Compare/">[LeetCode] 844. Backspace String Compare</a></p><p class="categories"><a href="/categories/LeetCode/">LeetCode</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-07-02T17:00:56.000Z">2020-07-03</time></p><p class="title"><a href="/2020/07/03/%5BLeetCode%5D%20185.%20Department%20Top%20Three%20Salaries/">[LeetCode] 185. Department Top Three Salaries</a></p><p class="categories"><a href="/categories/LeetCode/">LeetCode</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-07-02T16:33:01.000Z">2020-07-03</time></p><p class="title"><a href="/2020/07/03/%5BLeetCode%5D%20262.%20Trips%20and%20Users/">[LeetCode] 262. Trips and Users</a></p><p class="categories"><a href="/categories/LeetCode/">LeetCode</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-06-30T17:34:38.000Z">2020-07-01</time></p><p class="title"><a href="/2020/07/01/%5BLeetCode%5D%20180.%20Consecutive%20Numbers/">[LeetCode]180. Consecutive Numbers</a></p><p class="categories"><a href="/categories/LeetCode/">LeetCode</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2020-06-14T10:16:21.000Z">2020-06-14</time></p><p class="title"><a href="/2020/06/14/%5BOracle%20SQL%5D%20rank()%E5%88%86%E6%9E%90%E5%87%BD%E6%95%B8%E7%94%A8%E6%B3%95/">[Oracle SQL] rank()分析函數用法</a></p><p class="categories"><a href="/categories/Oracle-SQL/">Oracle SQL</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">彙整</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2021/06/"><span class="level-start"><span class="level-item">六月 2021</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/07/"><span class="level-start"><span class="level-item">七月 2020</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/06/"><span class="level-start"><span class="level-item">六月 2020</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/05/"><span class="level-start"><span class="level-item">五月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/archives/2020/01/"><span class="level-start"><span class="level-item">一月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">標籤</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/Array/"><span class="tag">Array</span><span class="tag">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Blog/"><span class="tag">Blog</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/C/"><span class="tag">C++</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GitHub/"><span class="tag">GitHub</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hexo/"><span class="tag">Hexo</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Image-Processing/"><span class="tag">Image Processing</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Java/"><span class="tag">Java</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LinkedList/"><span class="tag">LinkedList</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PL-SQL/"><span class="tag">PL/SQL</span><span class="tag">6</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Queue/"><span class="tag">Queue</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Tree/"><span class="tag">Tree</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">訂閱 Email</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="訂閱"></div></div></form></div></div></div><div class="card widget" data-type="adsense"><div class="card-content"><div class="menu"><h3 class="menu-label">廣告</h3><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1036677873706989" data-ad-slot="1234567890" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Gordon的寇汀筆記本" height="28"></a><p class="is-size-7"><span>&copy; 2021 Gordon Fang</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-TW");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到頁首" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此網站使用Cookie來改善您的體驗。",
+          dismiss: "知道了！",
+          allow: "允許使用Cookie",
+          deny: "拒絕",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="請輸入關鍵字..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"請輸入關鍵字...","untitled":"(無標題)","posts":"文章","pages":"頁面","categories":"分類","tags":"標籤"});
+        });</script></body></html>
