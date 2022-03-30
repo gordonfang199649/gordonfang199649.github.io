@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gordonfang199649.github.io/2022/03/31/Azure-DevOps-Stakeholder-%E6%AC%8A%E9%99%90%E7%9C%8B%E4%B8%8D%E5%88%B0-Repo/</loc>
+    
+    <lastmod>2022-03-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://gordonfang199649.github.io/2022/03/12/%E5%A6%82%E4%BD%95%E5%9C%A8-Hexo-%E9%96%8B%E7%99%BC%E7%92%B0%E5%A2%83%E7%9A%84%E6%96%87%E7%AB%A0%E4%B8%AD%E5%8A%A0%E5%85%A5-LikeCoin-button/</loc>
     
     <lastmod>2022-03-12</lastmod>
@@ -193,7 +202,7 @@
 
   <url>
     <loc>https://gordonfang199649.github.io/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -201,140 +210,147 @@
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/Git/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/GitHub/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/Hexo/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/Blog/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/PL-SQL/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/Java/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/Tree/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/Queue/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/Array/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/Image-Processing/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/LinkedList/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/C/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/%E5%BF%83%E5%BE%97/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/Spring-Boot/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/Number/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/Heroku/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/Flask/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/Python/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/LikeCoin/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/tags/BlockChain/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://gordonfang199649.github.io/tags/Azure-DevOps/</loc>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -343,49 +359,56 @@
   
   <url>
     <loc>https://gordonfang199649.github.io/categories/Hexo/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/categories/LeetCode/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/categories/Oracle-SQL/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/categories/Image-Processing/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/categories/Spring-Boot/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/categories/Java/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://gordonfang199649.github.io/categories/Heroku/</loc>
-    <lastmod>2022-03-13</lastmod>
+    <lastmod>2022-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://gordonfang199649.github.io/categories/Azure-DevOps/</loc>
+    <lastmod>2022-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
