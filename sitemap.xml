@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://gordonfang199649.github.io/2020/05/31/[LeetCode]%2066.%20Plus%20One/</loc>
+    
+    <lastmod>2024-01-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://gordonfang199649.github.io/google58d6fad2a0272c19.html</loc>
     
     <lastmod>2024-01-27</lastmod>
@@ -165,15 +174,6 @@
   
   <url>
     <loc>https://gordonfang199649.github.io/2020/06/01/[LeetCode]%2088-Merge-Sorted-Array/</loc>
-    
-    <lastmod>2021-06-27</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://gordonfang199649.github.io/2020/05/31/[LeetCode]%2066.%20Plus%20One/</loc>
     
     <lastmod>2021-06-27</lastmod>
     
